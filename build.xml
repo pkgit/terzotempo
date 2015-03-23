@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="terzotempo" default="cp" >
+    <property name="project.basedir" value="."/>
+    <property name="deploy.basedir" value="/var/www/terzotempo"/>
+    <property name="terzotempo.basedir" value="${project.basedir}"/>
+    <property name="terzotempo.public.basedir" value="${project.basedir}/public"/>
+    <property name="terzotempo.scripts.basedir" value="${project.basedir}/scripts"/>
+    <property name="terzotempo.deploydir" value="${deploy.basedir}"/>
+
+    <target name="dd" depends="cp, restart-apache"/>
+
+    <target name="cp">
+        <echo msg= "copy the content of ${terzotempo.public.basedir} in ${terzotempo.deploydir}"/>
+        <copy todir="${terzotempo.deploydir}" overwrite="true">
+            <fileset dir="${terzotempo.public.basedir}" includes="**"/>
+        </copy>
+        
+        <echo msg= "copy the content of ${terzotempo.scripts.basedir} in ${terzotempo.deploydir}/scripts"/>
+        <copy todir="${terzotempo.deploydir}/scripts" overwrite="true">
+            <fileset dir="${terzotempo.scripts.basedir}" includes="**"/>
+        </copy>
+    </target>
+
+    <target name="restart-apache" description="execute a remote command to restart apache">
+        <exec executable="/etc/init.d/apache2">
+            <arg value="restart"/>
+        </exec>
+        <echo msg="apache restarted"/>
+    </target>
+
+</project>
