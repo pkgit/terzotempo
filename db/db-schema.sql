@@ -170,6 +170,37 @@ LOCK TABLES `user` WRITE;
 /*!40000 ALTER TABLE `user` DISABLE KEYS */;
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `video`
+--
+
+DROP TABLE IF EXISTS `video`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `video` (
+  `video_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `public` tinyint(1) NOT NULL DEFAULT '0',
+  `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  `added` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `user_id` bigint(20) unsigned NOT NULL,
+  `match_id` bigint(20) unsigned NOT NULL,
+  PRIMARY KEY (`video_id`),
+  KEY `user_id` (`user_id`),
+  KEY `match_id` (`match_id`),
+  KEY `added` (`added`),
+  CONSTRAINT `video_ibfk_1` FOREIGN KEY (`match_id`) REFERENCES `matchcode` (`matchcode_id`) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `video`
+--
+
+LOCK TABLES `video` WRITE;
+/*!40000 ALTER TABLE `video` DISABLE KEYS */;
+/*!40000 ALTER TABLE `video` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -180,4 +211,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-03-23 17:51:05
+-- Dump completed on 2015-03-24 18:19:38
