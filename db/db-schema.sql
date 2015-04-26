@@ -1,8 +1,8 @@
--- MySQL dump 10.13  Distrib 5.6.16, for debian-linux-gnu (x86_64)
+-- MySQL dump 10.13  Distrib 5.6.22, for debian-linux-gnu (x86_64)
 --
 -- Host: localhost    Database: terzotempo
 -- ------------------------------------------------------
--- Server version	5.6.16-1+sury.org~precise+1
+-- Server version	5.6.22-1+deb.sury.org~precise+1
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -14,6 +14,29 @@
 /*!40014 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0 */;
 /*!40101 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='NO_AUTO_VALUE_ON_ZERO' */;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
+
+--
+-- Table structure for table `category`
+--
+
+DROP TABLE IF EXISTS `category`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `category` (
+  `category_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `name` varchar(50) COLLATE utf8_unicode_ci DEFAULT NULL,
+  PRIMARY KEY (`category_id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `category`
+--
+
+LOCK TABLES `category` WRITE;
+/*!40000 ALTER TABLE `category` DISABLE KEYS */;
+/*!40000 ALTER TABLE `category` ENABLE KEYS */;
+UNLOCK TABLES;
 
 --
 -- Table structure for table `match`
@@ -104,6 +127,35 @@ CREATE TABLE `matchuser` (
 LOCK TABLES `matchuser` WRITE;
 /*!40000 ALTER TABLE `matchuser` DISABLE KEYS */;
 /*!40000 ALTER TABLE `matchuser` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
+-- Table structure for table `rate`
+--
+
+DROP TABLE IF EXISTS `rate`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `rate` (
+  `rate_id` bigint(20) unsigned NOT NULL AUTO_INCREMENT,
+  `added` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00',
+  `video_id` bigint(20) unsigned NOT NULL,
+  `user_id` bigint(20) unsigned NOT NULL,
+  `rate` tinyint(1) NOT NULL DEFAULT '0',
+  PRIMARY KEY (`rate_id`),
+  KEY `user_id` (`user_id`),
+  KEY `video_id` (`video_id`),
+  KEY `added` (`added`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8 COLLATE=utf8_unicode_ci;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `rate`
+--
+
+LOCK TABLES `rate` WRITE;
+/*!40000 ALTER TABLE `rate` DISABLE KEYS */;
+/*!40000 ALTER TABLE `rate` ENABLE KEYS */;
 UNLOCK TABLES;
 
 --
@@ -211,4 +263,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2015-03-24 18:19:38
+-- Dump completed on 2015-04-26 17:45:20
